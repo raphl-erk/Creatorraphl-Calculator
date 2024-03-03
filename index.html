@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculator</title>
+</head>
+<body>
+    <h1 style="text-align: center ; text-decoration: underline; box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 30px 25px 20px rgba(0, 0, 0, 0.3);  padding: 6px; width: 60%; margin-left: 20%;">Creatorraphl Simple Calculator</h1>
+    <div class="Container">
+        <form class="calculator">
+            <div class="Display">
+                <input type="text" name="Display" id="Display">
+            </div>
+            <div>
+                <input class="operator" type="button" name="operator" value="AC" onclick="AllClear()">
+                <input class="operator" type="button" name="operator" style="font-size: 15px;" value="DEL" onclick="Delete()">
+                <input class="operator" type="button" name="operator" value="%" onclick="percentage()">
+                <input class="operator" type="button" name="operator" value="√" onclick="sqrtroot()">
+            </div>
+            <div>
+                <input class="operator" type="button" name="operator" value="7" onclick="numbers('7')">
+                <input class="operator" type="button" name="operator" value="8" onclick="numbers('8')">
+                <input class="operator" type="button" name="operator" value="9" onclick="numbers('9')">
+                <input class="operator" type="button" name="operator" value="*" onclick="multiplication()">
+                <input class="operator" type="button" name="operator" value="/" onclick="division()">
+            </div>
+            <div>
+                <input class="operator" type="button" name="operator" value="4" onclick="numbers('4')">
+                <input class="operator" type="button" name="operator" value="5" onclick="numbers('5')">
+                <input class="operator" type="button" name="operator" value="6" onclick="numbers('6')">
+                <input class="operator" type="button" name="operator" value="-" onclick="substract()">
+                <input class="operator" type="button" name="operator" value="+/-" onclick="toggleSign()">
+
+            </div>
+            <div>
+                <input class="operator" type="button" name="operator" value="1" onclick="numbers('1')">
+                <input class="operator" type="button" name="operator" value="2" onclick="numbers('2')">
+                <input class="operator" type="button" name="operator" value="3" onclick="numbers('3')">
+                <input class="operator" type="button" name="operator" value="+" onclick="add()">
+            </div>
+            <div>
+                <input class="operator" type="button" name="operator" value="." >
+                <input class="operator" type="button" name="operator" value="0" onclick="numbers('0')">
+                <input class="operator" type="button" name="operator" value="00" onclick="numbers('00')">
+                <input class="operator equal"  type="button" name="operator" value="=" onclick="solution()">
+            </div>
+        </form>
+    </div>
+    <script>
+        
+    function AllClear(){
+        var clear=document.getElementById('Display');
+        clear.value=" ";
+    }
+
+    function Delete(){
+        var erase=document.getElementById('Display');
+        erase.value=erase.value.slice(0, -1);
+    }
+
+
+    function numbers(digits){
+        var display=document.getElementById('Display');
+        display.value=display.value += digits;
+    }
+
+    function add(){
+        var plus=document.getElementById('Display');
+        plus.value=plus.value += '+';
+    }
+
+    function substract(){
+        var minus=document.getElementById('Display');
+        minus.value=minus.value += '-';
+    }
+
+    function multiplication(){
+        var into=document.getElementById('Display');
+        into.value=into.value += '*'
+    }
+
+    function division(){
+        let divide=document.getElementById('Display');
+        divide.value=divide.value += '/';
+    }
+
+    function percentage(){
+        var percentage=document.getElementById('Display');
+        percentage.value=eval(percentage.value + '/100');
+    }
+
+    function sqrtroot(){
+        var root=document.getElementById('Display');
+        root.value=Math.sqrt(root.value);
+    }
+
+    function toggleSign() {
+    var display = document.getElementById('Display');
+    var currentValue = display.value;
+
+    // Check if the current value is a number
+    if (!isNaN(currentValue)) {
+        // Toggle the sign of the number
+        if (currentValue.startsWith('-')) {
+            // Remove the minus sign
+            display.value = currentValue.substring(1);
+        } else {
+            // Add the minus sign
+            display.value = '-' + currentValue;
+        }
+    }
+}
+
+    function solution(){
+        var calculate=document.getElementById('Display');
+        calculate.value=eval(calculate.value);
+    }
+
+
+    document.addEventListener('keydown', function(event){
+        const key= event.key;
+
+        if(key.match(/[0-9%\/*\-+=.]|Backspace|Enter|Delete/)){
+            event.preventDefault();
+            switch(key){
+            case 'Backspace':
+            case 'Delete':
+                Delete();
+                break;
+
+            case 'Enter':
+                solution();
+                break;
+
+            default:
+                numbers(key);
+                break;
+
+            }
+        }
+    })
+</script>
+    
+</body>
+</html>
+
+
+<style type="text/css">
+	body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #09AAEF, #08FF6C);
+}
+.history{
+	width: 20%;
+	text-align: center;
+	color: black;
+}
+	.Container{
+		width: 100%;
+		height: 73vh;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+	}
+	.calculator{
+		border-radius: 15px;
+		background: #3a4660;
+		padding: 10px;
+		box-shadow: -8px -8px 15px rgba(250, 255, 255, 0.1), 30px 25px 20px rgba(0, 0, 0, 0.3);
+	}
+	.calculator input{
+		border: 0;
+		outline: 0;
+		width: 35px;
+		height: 35px;
+		border-radius: 10px;
+		box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3);
+		background: transparent;
+		font-size: 20px;
+		color: whitesmoke;
+		margin: 6.5px;
+		cursor: pointer;
+
+	}
+	form .Display{
+		display:flex;
+		justify-content: flex-end;
+		margin: 6px 0;
+	}
+	form .Display input{
+		text-align: right;
+		flex: 1;
+		font-size: 40px;
+		box-shadow:none;
+
+	}
+	form input.equal{width: 115px}
+
+    /* Media Query for mobile devices */
+@media only screen and (max-width: 00px) {
+    .container {
+        padding: 8px;
+    }
+
+    .operator {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+    .form {
+        grid-template-columns: repeat(2, 1fr); /* 3 columns */
+    }
+}
+</style>
+</html>
